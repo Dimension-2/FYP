@@ -1,0 +1,95 @@
+/* Container Styling */
+.course-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+  padding: 0 20px;
+  color: #064e3b; /* Deep Emerald Text */
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 25px;
+  display: inline-block;
+}
+
+/* Table Styling - The Emerald Glow */
+.course-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px; /* Creates a "card" row effect */
+  margin-bottom: 30px;
+  background: transparent;
+}
+
+.course-table th {
+  background: linear-gradient(90deg, #065f46 0%, #10b981 100%);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.75rem;
+  padding: 16px;
+  border-radius: 8px 8px 0 0;
+}
+
+.course-table tr {
+  transition: transform 0.2s ease;
+}
+
+.course-table td {
+  padding: 16px;
+  background: white;
+  border-top: 1px solid #ecfdf5;
+  border-bottom: 1px solid #d1fae5;
+}
+
+/* Rounded corners for the "Card" rows */
+.course-table td:first-child {
+  border-radius: 12px 0 0 12px;
+  border-left: 1px solid #d1fae5;
+}
+.course-table td:last-child {
+  border-radius: 0 12px 12px 0;
+  border-right: 1px solid #d1fae5;
+}
+
+.course-table tr:hover td {
+  background: #f0fdf4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+/* Status Badges - Vivid Emerald & Amber */
+.badge {
+  padding: 6px 12px;
+  border-radius: 99px; /* Pill shape */
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-new {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+}
+
+.badge-improve {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+
+/* Empty State - Soft Gradient Background */
+.empty-state {
+  text-align: center;
+  padding: 60px;
+  background: linear-gradient(145deg, #ffffff, #f0fdfa);
+  border: 2px dashed #a7f3d0;
+  border-radius: 20px;
+  color: #34d399;
+  font-weight: 500;
+}

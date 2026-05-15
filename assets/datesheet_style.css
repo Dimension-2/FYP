@@ -1,0 +1,93 @@
+/* Layout & Area */
+.main-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.content-area {
+    background-color: #f8fafc;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Slip Container */
+.slip-container {
+    max-width: 950px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 40px;
+    border-radius: 8px;
+    margin-bottom: 50px;
+}
+
+/* Info Grid Styling */
+.info-grid {
+    display: grid;
+    grid-template-columns: 180px 1fr 180px 1fr;
+    gap: 12px;
+    background: #fdfdfd;
+    padding: 20px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 6px;
+}
+
+.label {
+    font-weight: 700;
+    color: #475569;
+    font-size: 0.9rem;
+}
+
+.value {
+    color: #1e293b;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+/* Table Enhancements */
+.table thead th {
+    background-color: #1a365d !important;
+    color: white !important;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table tbody td {
+    font-size: 0.9rem;
+    padding: 12px 8px;
+}
+
+/* Print Handling */
+@media print {
+    #sidebar, .top-header-nav, .no-print, .breadcrumb-area, .header-container {
+        display: none !important;
+    }
+    
+    body {
+        background-color: white !important;
+    }
+
+    .main-wrapper {
+        display: block !important;
+    }
+
+    .content-area {
+        margin-left: 0 !important;
+        padding: 0 !important;
+        background: white !important;
+    }
+
+    .slip-container {
+        border: none !important;
+        box-shadow: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .table thead th {
+        background-color: #eee !important;
+        color: black !important;
+        border: 1px solid #000 !important;
+    }
+}

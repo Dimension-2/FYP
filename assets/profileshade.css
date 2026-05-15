@@ -1,0 +1,27 @@
+/* assets/css/profileshade.css */
+
+/* Box Shading for Cards */
+.card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Shading for Academic Table */
+.table-responsive {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.02);
+    border-radius: 0 0 10px 10px;
+}
+
+/* Subtle Shading for the Cyan Labels */
+.info-label {
+    box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.03); /* Gives a slight 3D depth to the highlight */
+}
+
+/* Shading for the round profile container */
+.profile-img-container {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}

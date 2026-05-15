@@ -1,0 +1,147 @@
+/* service2.css */
+
+:root {
+    --primary-blue: #007bff;
+    --primary-teal: #1abc9c;
+    --primary-pink: #e91e63;
+    --primary-indigo: #6610f2;
+    --transition-speed: 0.3s;
+}
+
+/* Layout Adjustments */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.content-area {
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+/* Service Grid Layout */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Service Card Styling */
+.service-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all var(--transition-speed) ease-in-out;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Card Hover Effects */
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: var(--primary-blue);
+}
+
+/* Icon Box Styling */
+.icon-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    font-size: 1.5rem;
+    color: white;
+    transition: transform var(--transition-speed) ease;
+}
+
+.service-card:hover .icon-box {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Custom Gradients for Icons */
+.bg-blue-grad { background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); }
+.bg-teal-grad { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+.bg-pink-grad { background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%); }
+.bg-indigo-grad { background: linear-gradient(135deg, #3f51b5 0%, #5c6bc0 100%); }
+
+/* History Table Section */
+.status-table-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+.table thead th {
+    border-bottom: none;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: #6c757d;
+    padding: 1rem;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s ease;
+    background-color: #fcfcfc;
+}
+
+.table tbody tr td {
+    border-top: 1px solid #f1f1f1;
+    border-bottom: 1px solid #f1f1f1;
+    padding: 1rem;
+}
+
+.table tbody tr td:first-child {
+    border-left: 1px solid #f1f1f1;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.table tbody tr td:last-child {
+    border-right: 1px solid #f1f1f1;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.table tbody tr:hover {
+    background-color: #f8faff;
+}
+
+/* Status Badge Customization */
+.badge {
+    font-weight: 500;
+    padding: 0.5em 1em;
+}
+
+.italic {
+    font-style: italic;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .service-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-grid {
+        grid-template-columns: 1fr;
+    }
+}

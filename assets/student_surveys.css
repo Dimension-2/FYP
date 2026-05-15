@@ -1,0 +1,56 @@
+/* --- Success Page Animations --- */
+.success-icon-wrapper i {
+    display: inline-block;
+    animation: scaleUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes scaleUp {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.text-teal {
+    color: #1abc9c !important; /* Direct teal color */
+}
+
+/* Background refinement for the success card */
+.container {
+    perspective: 1000px;
+}
+
+.card {
+    transition: transform 0.3s ease;
+}
+
+/* --- PRINT RULES (Fixes your issue) --- */
+@media print {
+    /* Hide everything marked no-print */
+    .no-print, 
+    .main-wrapper > div:first-child, 
+    .content-area > div:first-child,
+    .btn,
+    nav, 
+    header {
+        display: none !important;
+    }
+
+    /* Reset layout for paper */
+    .main-wrapper {
+        display: block !important;
+    }
+    
+    .content-area {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        margin-top: 50px !important;
+    }
+
+    body {
+        background-color: white !important;
+    }
+}

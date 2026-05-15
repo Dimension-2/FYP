@@ -1,0 +1,62 @@
+:root { --sidebar-width: 260px; --uw-blue: #3498db; }
+
+.main-wrapper { display: flex; }
+
+#sidebar { 
+    width: var(--sidebar-width); 
+    position: fixed; 
+    height: 100vh; 
+    z-index: 1000;
+}
+
+.content-area {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+    background-color: #f1f3f6;
+    min-height: 100vh;
+}
+
+.student-info-section {
+    background: white;
+    border-radius: 10px;
+    border-top: 4px solid var(--uw-blue);
+}
+
+.grade-container {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.semester-header {
+    background: var(--uw-blue);
+    color: white;
+    padding: 12px 20px;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.main-thead th {
+    background-color: #eef2f7 !important;
+    color: #334155;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: center;
+    border: 1px solid #dee2e6 !important;
+}
+
+.table td { 
+    text-align: center; 
+    font-size: 0.85rem; 
+    padding: 12px 8px;
+}
+
+.final-cell {
+    background-color: #f8fafc !important;
+    font-weight: 800;
+    color: #1e293b;
+    border-left: 2px solid #cbd5e1 !important;
+}
+
+.course-name { font-weight: 700; color: #1e293b; }

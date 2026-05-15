@@ -1,0 +1,115 @@
+:root {
+    --nav-width: 260px; 
+    --transition-speed: 0.4s;
+    --bezier: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+body.sidebar-closed {
+    --nav-width: 80px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    background-color: #d1d5db;
+    margin: 0;
+}
+
+.main-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    padding-left: var(--nav-width); 
+    transition: padding-left var(--transition-speed) var(--bezier);
+}
+
+.content-container {
+    padding: 25px;
+    width: 100%;
+}
+
+.content-card {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+.header-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.text-teal { color: #00cba9; }
+
+.semester-banner {
+    background-color: #00cba9;
+    color: white;
+    padding: 10px 15px;
+    font-weight: bold;
+    border-radius: 4px 4px 0 0;
+    margin-top: 20px;
+}
+
+.table-container {
+    width: 100%;
+    border: 1px solid #f0f0f0;
+    border-top: none;
+}
+
+.custom-table {
+    width: 100%;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+.custom-table thead th {
+    background-color: #e0f7f4 !important;
+    color: #555;
+    font-weight: 600;
+    padding: 12px 15px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.custom-table td {
+    padding: 12px 15px;
+    vertical-align: middle;
+    color: #444;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+/* Evaluate Button Styling */
+.btn-evaluate {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Hover Effect */
+.btn-evaluate:hover {
+    background-color: #218838;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+    transform: translateY(-1px);
+}
+
+.text-success {
+    color: #28a745 !important;
+}

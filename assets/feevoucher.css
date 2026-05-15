@@ -1,0 +1,31 @@
+/* Layout Alignment & Global Styles */
+.main-wrapper { display: flex; min-height: 100vh; overflow-x: hidden; }
+.content-area { background-color: #f8f9fa; flex-grow: 1; min-height: 100vh; }
+
+/* Voucher Container */
+.voucher-wrapper { display: flex; gap: 15px; justify-content: center; overflow-x: auto; padding: 20px 0; }
+.voucher-copy { background: #ffffff; width: 360px; padding: 15px; border: 1.5px dashed #aaa; border-radius: 4px; position: relative; }
+.voucher-logo { width: 45px; height: auto; }
+.copy-label { background: #212529; color: #fff; font-size: 10px; padding: 2px 10px; border-radius: 20px; text-transform: uppercase; display: inline-block; }
+
+/* Detailed Table Styles */
+.breakdown-table { font-size: 10px; margin-bottom: 10px; }
+.breakdown-table th { background: #f1f3f5 !important; font-weight: 600; }
+.breakdown-table td { padding: 4px 8px !important; }
+
+/* Status Labels */
+.status-paid { color: #198754; font-weight: 700; font-size: 0.9rem; }
+.status-unpaid { color: #dc3545; font-weight: 700; font-size: 0.9rem; }
+
+.x-small { font-size: 10.5px; line-height: 1.3; }
+.bank-details { background: #fffde7; border: 1px solid #ffe57f; border-radius: 4px; padding: 5px; font-size: 9px; margin-top: 10px; }
+
+/* Printing Logic */
+@media print {
+    #sidebar, .top-header-nav, .no-print, .breadcrumb-area, .btn, .modal, .toast { display: none !important; }
+    .content-area { padding: 0 !important; background-color: white !important; }
+    .voucher-wrapper { display: flex !important; flex-direction: row !important; gap: 0; width: 100%; justify-content: space-between; }
+    .voucher-copy { width: 32%; border: 1px solid #000 !important; box-shadow: none !important; margin: 0; padding: 10px; }
+    body { background-color: white !important; }
+    @page { size: landscape; margin: 0.5cm; }
+}

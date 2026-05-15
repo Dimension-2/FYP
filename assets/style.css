@@ -1,0 +1,149 @@
+:root {
+    --uw-primary: #008080;
+    --uw-dark: #1e293b;
+    --uw-light: #f1f5f9;
+    --sidebar-width: 260px;
+}
+
+body {
+    background-color: var(--uw-light);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Layout Structure */
+/* Layout Structure */
+.main-wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Updated Content Area */
+.content-area {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    padding: 30px;
+    background-color: var(--uw-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This centers the container horizontally */
+}
+
+/* Container to fill the page properly */
+.container-centered {
+    width: 100%;
+    max-width: 1200px; /* Limits width on ultra-wide screens but keeps it large */
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Adds the gap between header, cards, and table */
+}
+
+/* Fix for Service Portal Header */
+.service-portal-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Keeps title aligned left within the center container */
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+/* Page Title Centering */
+.content-area h2, .content-area h4 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 30px;
+    font-weight: 700;
+    color: var(--uw-dark);
+}
+
+/* Service Cards Grid */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.service-card {
+    background: white;
+    border-radius: 15px;
+    padding: 35px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
+    border-color: var(--uw-primary);
+}
+
+.icon-box {
+    width: 70px;
+    height: 70px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 1.8rem;
+    color: white;
+}
+
+/* Gradients */
+.bg-teal-grad { background: linear-gradient(135deg, #2dd4bf, #0d9488); }
+.bg-blue-grad { background: linear-gradient(135deg, #60a5fa, #2563eb); }
+.bg-pink-grad { background: linear-gradient(135deg, #f472b6, #db2777); }
+.bg-indigo-grad { background: linear-gradient(135deg, #818cf8, #4f46e5); }
+
+/* History Table Card */
+.status-table-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+/* Table Enhancements */
+.table thead th {
+    background-color: #f8fafc;
+    color: var(--uw-dark);
+    font-weight: 600;
+    border-bottom: 2px solid #edf2f7;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.025em;
+}
+
+/* Form Elements */
+.form-control, .form-select {
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.form-control:focus {
+    border-color: var(--uw-primary);
+    box-shadow: 0 0 0 4px rgba(0, 128, 128, 0.1);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 992px) {
+    .content-area {
+        margin-left: 0;
+        padding: 20px 15px;
+    }
+    
+    .service-grid {
+        grid-template-columns: 1fr;
+    }
+}

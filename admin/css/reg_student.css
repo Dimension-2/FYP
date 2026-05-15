@@ -1,0 +1,154 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&family=Inter:wght@300;400;500;600&display=swap");
+
+:root {
+  --emerald-grad: linear-gradient(90deg, #065f46 0%, #10b981 100%);
+  --emerald: #10b981;
+  --dark-sidebar: #1a1a1a;
+  --text-primary: #1a1a1a;
+  --bg-white: #ffffff;
+  --transition-speed: 0.4s;
+}
+
+body {
+  background-color: #fcfcfc;
+  font-family: "Montserrat", sans-serif;
+  color: var(--text-primary);
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* --- Layout Architecture --- */
+#wrapper {
+  display: flex;
+  width: 100%;
+}
+
+/* --- Razor Sharp Sidebar --- */
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  background-color: var(--dark-sidebar);
+  transition: width var(--transition-speed) cubic-bezier(0.2, 1, 0.2, 1);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  border-right: 3px solid var(--emerald); /* Sharp Accent Line */
+}
+
+.sidebar.collapsed {
+  width: 85px;
+}
+
+/* Sidebar Links */
+.nav-link {
+  border-radius: 0 !important; /* No curves */
+  color: #94a3b8 !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.75rem;
+  padding: 15px 25px;
+  transition: all 0.3s;
+}
+
+.nav-link.active {
+  background: var(--emerald-grad) !important;
+  color: #fff !important;
+  box-shadow: 10px 0px 0px 0px var(--emerald);
+}
+
+.nav-link:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--emerald) !important;
+}
+
+/* --- Content Wrapper --- */
+#page-content-wrapper {
+  flex: 1;
+  margin-left: 280px;
+  transition: margin-left var(--transition-speed) ease;
+  padding: 40px;
+}
+
+body.sidebar-closed #page-content-wrapper {
+  margin-left: 85px;
+}
+
+/* --- Sharp Card Architecture --- */
+.card {
+  background: var(--bg-white) !important;
+  border: 2px solid #f0f0f0 !important;
+  border-radius: 0px !important; /* Razor Sharp */
+  box-shadow: 15px 15px 0px 0px rgba(16, 185, 129, 0.08) !important;
+  animation: slideIn 0.8s cubic-bezier(0.2, 1, 0.2, 1);
+  margin-bottom: 30px;
+}
+
+.card-header {
+  background: #1a1a1a !important;
+  border-radius: 0 !important;
+  padding: 1.5rem !important;
+  border-bottom: 5px solid var(--emerald) !important;
+}
+
+.card-header h3,
+.card-header h5 {
+  font-weight: 200;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+}
+
+/* --- Section Headings --- */
+.section-heading {
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  color: var(--emerald);
+  text-transform: uppercase;
+  margin: 30px 0 15px 0;
+  padding-left: 10px;
+  border-left: 3px solid var(--emerald);
+}
+
+/* --- Data Table: Sharp & Visible --- */
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.info-table td {
+  padding: 15px;
+  border: 1px solid #f0f0f0;
+  font-size: 0.9rem;
+}
+
+.label-cell {
+  background: #fafafa;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  width: 20%;
+}
+
+/* --- Animations --- */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#toggleBtn {
+  background: var(--emerald);
+  color: white;
+  border-radius: 0;
+  margin-right: 15px;
+  padding: 5px 10px;
+}

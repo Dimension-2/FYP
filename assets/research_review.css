@@ -1,0 +1,68 @@
+/* Table and Card Styling */
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table thead th {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+.badge {
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+/* Modal Styling */
+.modal-content {
+    border: none;
+    border-radius: 15px;
+}
+
+/* --- PRINT FIXES --- */
+@media print {
+    /* Hide the navbar, header, and all action buttons */
+    .no-print, 
+    nav, 
+    .sidebar, 
+    header, 
+    .btn, 
+    .modal,
+    .breadcrumb {
+        display: none !important;
+    }
+
+    /* Reset the main layout for paper */
+    .main-wrapper {
+        display: block !important;
+    }
+
+    .content-area {
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Force background colors to print */
+    .table-light {
+        background-color: #f8f9fa !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+
+    /* Ensure table text is black and readable */
+    body {
+        font-size: 12pt;
+        color: #000;
+        background: white !important;
+    }
+}

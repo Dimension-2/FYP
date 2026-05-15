@@ -1,0 +1,98 @@
+/* Container and Card Styling */
+.content-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 30px;
+    border: 1px solid #edf2f7;
+}
+
+/* Calendar Date Icon Style */
+.date-icon {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    min-width: 55px;
+    padding: 5px;
+}
+
+/* Modern Status Pills */
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status-present {
+    background-color: #ecfdf5;
+    color: #059669;
+}
+
+.status-absent {
+    background-color: #fef2f2;
+    color: #dc2626;
+}
+
+.status-leave {
+    background-color: #eff6ff;
+    color: #2563eb;
+}
+
+/* Topic Box styling */
+.topic-box {
+    font-size: 14px;
+    color: #475569;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Table Row Animation */
+.history-row {
+    transition: all 0.2s ease;
+}
+
+.history-row:hover {
+    background-color: #f8fafc;
+    transform: translateX(5px);
+}
+
+.text-teal { color: #319795; }
+/* Summary Cards */
+.summary-card {
+    border-radius: 12px;
+    transition: transform 0.2s ease;
+}
+.summary-card:hover { transform: translateY(-3px); }
+
+.icon-circle {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+/* Date Icon Overhaul */
+.date-icon {
+    background: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 2px 8px;
+    text-align: center;
+    min-width: 50px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+.date-icon .month { font-size: 10px; text-transform: uppercase; color: #888; display: block; }
+.date-icon .day { font-size: 18px; font-weight: 800; color: #333; display: block; line-height: 1; }
+
+/* Existing components maintained */
+.status-pill { padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: 600; }
+.status-present { background: #dcfce7; color: #166534; }
+.status-absent { background: #fee2e2; color: #991b1b; }
+.lecture-badge { background: #f8fafc; border: 1px solid #e2e8f0; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 700; }

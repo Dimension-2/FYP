@@ -1,0 +1,156 @@
+/* Semester Result Premium Styling */
+:root {
+    --uw-teal: #008080;
+    --probation-yellow: #f1c40f;
+    --failed-red: #e74c3c;
+    --passed-green: #2ecc71;
+    --animation-speed: 0.4s;
+}
+
+/* Base Card Entry Animation */
+.result-card {
+    border-radius: 15px;
+    background: #fff;
+    overflow: hidden;
+    animation: slideUpFade 0.8s ease-out;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.result-header-banner {
+    background: #005f5f;
+    color: white;
+    padding: 35px 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glassmorphism Info Boxes with Glow Effect */
+.student-info-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.info-box {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 20px;
+    border-radius: 10px;
+    flex: 1;
+    min-width: 180px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+.info-box:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.info-box label {
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    opacity: 0.8;
+}
+
+.info-box span {
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: block;
+    margin-top: 2px;
+}
+
+/* Table Row Hover & Animation */
+.table-result tbody tr {
+    transition: all 0.3s ease;
+    animation: fadeInRow 0.5s ease forwards;
+    opacity: 0;
+}
+
+/* Staggered Row Animation - each row appears slightly after the other */
+.table-result tbody tr:nth-child(1) { animation-delay: 0.1s; }
+.table-result tbody tr:nth-child(2) { animation-delay: 0.2s; }
+.table-result tbody tr:nth-child(3) { animation-delay: 0.3s; }
+.table-result tbody tr:nth-child(4) { animation-delay: 0.4s; }
+.table-result tbody tr:nth-child(5) { animation-delay: 0.5s; }
+
+.table-result tbody tr:hover {
+    background-color: #f0fdfa !important;
+    transform: scale(1.01) translateX(5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Status & Summary Card Hover Effects */
+.status-card, .card.bg-light, .card.bg-white {
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.status-passed { background: var(--passed-green); }
+.status-probation { background: var(--probation-yellow); color: #000 !important; }
+.status-failed { background: var(--failed-red); }
+
+.status-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+}
+
+.status-card h2 { 
+    font-weight: 800; 
+    margin: 0; 
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Floating Animation for Badges */
+.badge.rounded-pill {
+    transition: all 0.3s ease;
+}
+
+.badge.rounded-pill:hover {
+    transform: rotate(5deg) scale(1.1);
+}
+
+/* Keyframes for New Animations */
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRow {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Print Optimization */
+@media print {
+    .no-print { display: none !important; }
+    .result-header-banner { 
+        background: #005f5f !important; 
+        -webkit-print-color-adjust: exact; 
+        print-color-adjust: exact;
+    }
+    .result-card {
+        box-shadow: none;
+        animation: none;
+    }
+}

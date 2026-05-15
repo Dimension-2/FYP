@@ -1,0 +1,154 @@
+.top-header-nav {
+    background-color: #ffffff;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e9ecef;
+    padding: 0 30px;
+    margin-bottom: 25px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Breadcrumbs Section */
+.breadcrumb-area {
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.breadcrumb-label {
+    color: #adb5bd;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.breadcrumb-item {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.breadcrumb-item:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    color: #ced4da;
+    margin: 0 10px;
+}
+
+.breadcrumb-active {
+    color: #495057;
+    font-weight: 500;
+}
+
+/* User Profile Section */
+.welcome-msg {
+    font-size: 14px;
+    color: #6c757d;
+    margin-right: 20px;
+}
+
+.user-name {
+    color: #212529;
+    font-weight: 600;
+}
+
+.account-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.account-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.2s;
+}
+
+.account-btn:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    min-width: 180px;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
+    z-index: 1100;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    color: #495057;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.dropdown-content a:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
+}
+
+.dropdown-content hr {
+    margin: 0;
+    border-top: 1px solid #eee;
+}
+
+.show {
+    display: block;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-menu {
+    width: 250px !important;
+}
+
+.notification-item {
+    border-bottom: 1px solid #f8f9fa;
+    padding: 10px 15px !important;
+}
+
+.notification-item:hover {
+    background-color: #f0fdfa !important;
+}

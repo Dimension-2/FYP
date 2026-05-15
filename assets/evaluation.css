@@ -1,0 +1,44 @@
+.option-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.option-item:hover {
+    background: #f7fafc;
+    border-color: #cbd5e0;
+}
+
+.option-item input[type="radio"] {
+    margin-right: 12px;
+    width: 18px;
+    height: 18px;
+    accent-color: #00cba9;
+}
+
+/* Selected state styling */
+.option-item:has(input:checked) {
+    background: #e6fffa;
+    border-color: #00cba9;
+    color: #00cba9;
+    font-weight: 600;
+}
+
+.btn-submit-feedback {
+    background-color: #00cba9;
+    color: white;
+    border: none;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.btn-submit-feedback:hover {
+    background-color: #00a88d;
+}
