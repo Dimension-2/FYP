@@ -47,7 +47,7 @@ if (!$data) {
                     <div class="row align-items-center">
                         <div class="col-auto">
                             <div class="profile-img-container">
-                                <img src="../../Images/uw.webp.png" alt="Teacher" class="profile-main-img">
+                                <img src="../../Images/user.webp" alt="Teacher" class="profile-main-img">
                             </div>
                         </div>
                         <div class="col">

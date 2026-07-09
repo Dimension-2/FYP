@@ -15,9 +15,10 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get Course Info from URL
-$course_name = isset($_GET['course']) ? htmlspecialchars($_GET['course']) : "Selected Course";
-$course_code = isset($_GET['code']) ? htmlspecialchars($_GET['code']) : "N/A";
+// Get Course Info from URL correctly mapping to the buttons link format
+$course_name = isset($_GET['course_title']) ? htmlspecialchars($_GET['course_title']) : "Selected Course";
+$course_code = isset($_GET['course_code']) ? htmlspecialchars($_GET['course_code']) : "N/A";
+$teacher_name = isset($_GET['instructor']) ? htmlspecialchars($_GET['instructor']) : "";
 
 // --- SUBMISSION HANDLING ---
 $submitted = false;
@@ -25,20 +26,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $reg_no = $_SESSION['registration_no'];
     $answers = [];
 
-    // Collect all 20 question answers
     for ($i = 0; $i < 20; $i++) {
-        $key = "q" . $i;
-        $answers[$key] = isset($_POST[$key]) ? $_POST[$key] : 0;
+        $answers["q" . $i] = isset($_POST["q" . $i]) ? $_POST["q" . $i] : 0;
     }
 
-    // Prepare data for insertion
     $scores_json = json_encode($answers);
     $comments = $conn->real_escape_string($_POST['comments'] ?? '');
     $sub_date = date('Y-m-d');
 
-    // Single Consolidated Query (Including registration_no)
-    $stmt = $conn->prepare("INSERT INTO faculty_feedback (registration_no, course_code, course_title, scores, comments, submission_date) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $reg_no, $course_code, $course_name, $scores_json, $comments, $sub_date);
+    // Consolidated Query NOW INCLUDES teacher_name
+    $stmt = $conn->prepare("INSERT INTO faculty_feedback (registration_no, course_code, course_title, teacher_name, scores, comments, submission_date) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssss", $reg_no, $course_code, $course_name, $teacher_name, $scores_json, $comments, $sub_date);
 
     if ($stmt->execute()) {
         $submitted = true;
@@ -196,7 +194,8 @@ $totalQuestions = count($questions);
                                     <div class="col-md-6">
                                         <div class="question-row border p-4 rounded h-100 bg-white shadow-sm">
                                             <p class="question-text fw-semibold mb-3">
-                                                <?php echo ($index + 1) . ". " . $q; ?></p>
+                                                <?php echo ($index + 1) . ". " . $q; ?>
+                                            </p>
                                             <div class="options-group">
                                                 <?php
                                                 $opts = [5 => "Strongly Agree", 4 => "Agree", 3 => "Neutral", 2 => "Disagree", 1 => "Strongly Disagree"];

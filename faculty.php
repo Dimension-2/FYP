@@ -39,10 +39,11 @@ $profile_query = "SELECT semester FROM profile WHERE registration_no = '$reg_no'
 $profile_res = $conn->query($profile_query);
 $student_semester = ($profile_res && $profile_res->num_rows > 0) ? $profile_res->fetch_assoc()['semester'] : 0;
 
-// 4. Fetch courses assigned
-$courses_query = "SELECT course_code, course_title, teacher_name, credit_hours 
-                  FROM course_assignments 
-                  WHERE semester = '$student_semester'";
+// 4. Fetch courses assigned along with lock status
+$courses_query = "SELECT ca.course_code, ca.course_title, ca.teacher_name, ca.credit_hours, IFNULL(tfl.is_locked, 0) as is_locked 
+                  FROM course_assignments ca
+                  LEFT JOIN teacher_feedback_locks tfl ON ca.teacher_name = tfl.teacher_name
+                  WHERE ca.semester = '$student_semester'";
 $courses_result = $conn->query($courses_query);
 ?>
 
@@ -115,7 +116,8 @@ $courses_result = $conn->query($courses_query);
                         <div>
                             <h4 class="fw-bold m-0">Faculty Feedback</h4>
                             <p class="text-muted m-0">Assigned Courses for Semester
-                                <?php echo htmlspecialchars($student_semester); ?></p>
+                                <?php echo htmlspecialchars($student_semester); ?>
+                            </p>
                         </div>
                     </div>
 
@@ -164,6 +166,8 @@ $courses_result = $conn->query($courses_query);
                                                         Done</span>
                                                 <?php elseif ($instructor == "Not Assigned"): ?>
                                                     <span class="text-muted small italic">Unavailable</span>
+                                                <?php elseif ($c['is_locked'] == 1): ?>
+                                                    <span class="badge bg-danger">Locked by Admin</span>
                                                 <?php else: ?>
                                                     <a href="evaluate.php?course_code=<?php echo urlencode($c['course_code']); ?>&course_title=<?php echo urlencode($c['course_title']); ?>&instructor=<?php echo urlencode($instructor); ?>"
                                                         class="btn btn-evaluate">Start Evaluation</a>

@@ -9,41 +9,32 @@ if (!isset($_SESSION['registration_no'])) { header("Location: login.php"); exit(
     $page_title = "Hostel Mess Voucher"; 
     $student_reg = $_SESSION['registration_no'];
 
-    // FETCH LATEST MESS VOUCHER FOR THIS STUDENT
-    $sql = "SELECT * FROM hostel_mess_vouchers WHERE registration_no = '$student_reg' ORDER BY id DESC LIMIT 1";
-    $result = $conn->query($sql);
-$stmt = $conn->prepare("SELECT challan_no, student_name, billing_month, mess_charges, special_charges, total_payable, status FROM hostel_mess_vouchers WHERE registration_no = ? ORDER BY id DESC LIMIT 1");
-    // Initialize variables with DB values or Fallback Defaults
+    // 1. Verify if student has applied for a hostel (Option 2)
+    $hostel_check = $conn->prepare("SELECT id FROM hostel_applications WHERE registration_no = ? LIMIT 1");
+    $hostel_check->bind_param("s", $student_reg);
+    $hostel_check->execute();
+    $hostel_res = $hostel_check->get_result();
+    $has_hostel = ($hostel_res && $hostel_res->num_rows > 0);
+
+    // 2. Fetch Active Mess Voucher
+    $stmt = $conn->prepare("SELECT * FROM hostel_mess_vouchers WHERE registration_no = ? ORDER BY id DESC LIMIT 1");
+    $stmt->bind_param("s", $student_reg);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $has_mess_voucher = false;
+
     if ($result && $result->num_rows > 0) {
+        $has_mess_voucher = true;
         $data = $result->fetch_assoc();
-        $challan_no = $data['challan_no'];
-        $student_name = $data['student_name'];
-        $current_month = $data['billing_month'];
+        $challan_no = htmlspecialchars($data['challan_no']);
+        $student_name = htmlspecialchars($data['student_name']);
+        $current_month = htmlspecialchars($data['billing_month']);
         $mess_charges = $data['mess_charges'];
         $special_charges = $data['special_charges'];
         $total_payable = $data['total_payable'];
         $status = $data['status'];
-    } 
-    else {
-    // 1. Fetch the student's actual name from the students table
-    $stmt_name = $conn->prepare("SELECT student_name, monthly_mess_rate FROM students WHERE registration_no = ?");
-    $stmt_name->bind_param("s", $student_reg);
-    $stmt_name->execute();
-    $res_name = $stmt_name->get_result();
-    $student_row = $res_name->fetch_assoc();
-
-    // 2. Extract last two digits of Reg No for the Challan suffix
-    $reg_suffix = substr($student_reg, -2); 
-
-    // 3. Set Dynamic Fallbacks
-    $challan_no = "HMES-" . preg_replace("/[^A-Za-z0-9]/", "", $student_reg) . "-" . time();
-    $student_name    = $student_row['student_name'] ?? "N/A";
-    $current_month   = date('F Y');
-    $mess_charges = $student_row['monthly_mess_rate'] ?? 0; // Standard rate
-    $special_charges = 0;     // No special charges by default
-    $total_payable   = $mess_charges + $special_charges;
-    $status          = "Unpaid";
-}
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,11 +61,12 @@ $stmt = $conn->prepare("SELECT challan_no, student_name, billing_month, mess_cha
         </div>
 
         <div class="container-fluid px-4 mt-4">
-            <div class="row align-items-center mb-4 no-print">
+<div class="row align-items-center mb-4 no-print">
                 <div class="col-md-6">
                     <h3 class="fw-bold text-dark m-0">Hostel Mess Voucher</h3>
                     <p class="text-muted small">Home / Hostel / Mess Dues</p>
                 </div>
+                <?php if ($has_mess_voucher): ?>
                 <div class="col-md-6 text-md-end">
                     <button class="btn btn-outline-info shadow-sm me-2" data-bs-toggle="modal" data-bs-target="#messHistoryModal">
                         <i class="bi bi-calendar-check me-1"></i> Mess History
@@ -83,8 +75,30 @@ $stmt = $conn->prepare("SELECT challan_no, student_name, billing_month, mess_cha
                         <i class="bi bi-printer me-1"></i> Print Voucher
                     </button>
                 </div>
+                <?php endif; ?>
             </div>
 
+            <?php if (!$has_hostel): ?>
+                <div class="card border-0 shadow-sm text-center py-5 mt-4">
+                    <div class="card-body">
+                        <i class="bi bi-x-circle-fill text-danger mb-3" style="font-size: 4rem;"></i>
+                        <h4 class="fw-bold text-dark">Access Denied</h4>
+                        <p class="text-muted mb-0">You must have an approved hostel room to access the mess facility.</p>
+                    </div>
+                </div>
+            <?php elseif (!$has_mess_voucher): ?>
+                <div class="card border-0 shadow-sm text-center py-5 mt-4">
+                    <div class="card-body">
+                        <i class="bi bi-cup-hot-fill text-warning mb-3" style="font-size: 4rem;"></i>
+                        <h4 class="fw-bold text-dark">Mess Not Joined</h4>
+                        <p class="text-muted mb-4">You have not applied for the hostel mess yet. Join the mess to generate your monthly vouchers.</p>
+                        <a href="hostel_mess_apply.php" class="btn btn-primary px-4 py-2 fw-bold shadow-sm">
+                            <i class="bi bi-plus-circle me-2"></i> Join Hostel Mess
+                        </a>
+                    </div>
+                </div>
+                <!-- PASTE YOUR EXISTING VOUCHER HTML HERE (The Alert and the foreach loop for the 3 copies) -->
+            <?php endif; ?>
             <div class="alert mess-alert border-0 shadow-sm d-flex align-items-center no-print mb-4" style="background-color: #e3f2fd; border-left: 5px solid #0d6efd !important;">
                 <i class="bi bi-info-circle-fill fs-4 me-3 text-primary"></i>
                 <div>

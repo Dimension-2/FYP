@@ -1,4 +1,4 @@
-/* Accurate History Button */
+Accurate History Button
 .btn-view-accurate {
     display: inline-flex;
     align-items: center;
@@ -17,7 +17,7 @@
 
 .btn-view-accurate i {
     font-size: 14px;
-    color: #17a2b8; /* Matching your teal/blue theme */
+    color: #17a2b8; 
 }
 
 .btn-view-accurate:hover {
@@ -32,7 +32,6 @@
     color: #ffffff;
 }
 
-/* Status Badge refinement */
 .status-badge {
     padding: 5px 14px;
     border-radius: 50px;
@@ -46,7 +45,5 @@
 .status-success { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
 .status-warning { background-color: #fef9c3; color: #854d0e; border: 1px solid #fef08a; }
 .status-danger { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
-
-/* Progress Bar shadow */
 .progress { overflow: visible; }
 .progress-bar { box-shadow: 0 0 8px rgba(0,0,0,0.1); }

@@ -79,142 +79,204 @@ $result = $conn->query($sql);
     <title>Attendance Dashboard | Student Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
     <link rel="stylesheet" href="assets/navbar.css">
     <link rel="stylesheet" href="assets/header.css">
     <link rel="stylesheet" href="assets/attendance_style.css">
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
         :root {
-            --sidebar-width: 260px;
-            --header-height: 70px;
+            --premium-bg: #f8fafc;
         }
 
         body {
-            background: #f0f2f5;
+            background-color: var(--premium-bg);
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
+            color: #334155;
         }
 
-        /* Sidebar: Fixed to left */
-        .sidebar-container {
-            width: var(--sidebar-width);
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            z-index: 1000;
-            background: #1e1e2d;
-            /* Adjust color to match your sidebar theme */
-            overflow-y: auto;
-        }
-
-        /* Content Wrapper: Pushed to the right of sidebar */
-        .content-wrapper {
-            margin-left: var(--sidebar-width);
-            width: calc(100% - var(--sidebar-width));
+        /* ---------------------------------------------------
+           CORE LAYOUT (MATCHING FACULTY.PHP)
+        ----------------------------------------------------- */
+        .main-wrapper {
+            display: flex;
             min-height: 100vh;
+        }
+
+        .content-container {
+            flex-grow: 1;
+            background-color: var(--premium-bg);
             display: flex;
             flex-direction: column;
-        }
-
-        /* Header: Top of the content area */
-        .header-container {
             width: 100%;
-            height: var(--header-height);
-            background: white;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 0;
-            z-index: 999;
         }
 
-        .main-content-area {
-            padding: 30px;
-            flex-grow: 1;
-        }
-
+        /* ---------------------------------------------------
+           ATTENDANCE SPECIFIC STYLES
+        ----------------------------------------------------- */
         .content-card {
-            border-radius: 15px;
-            background: white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            padding: 30px;
-            border: none;
-        }
-
-        .progress {
-            border-radius: 10px;
-            background-color: #e9ecef;
-            height: 8px;
+            border-radius: 14px;
+            background: #ffffff;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            box-shadow: none !important; 
+            margin-bottom: 0;
         }
 
         .icon-box {
-            width: 50px;
-            height: 50px;
+            width: 46px;
+            height: 46px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.02) 100%) !important;
+            border: 1px solid rgba(16, 185, 129, 0.15);
+            border-radius: 10px !important;
         }
 
-        @media (max-width: 992px) {
-            .sidebar-container {
-                display: none;
-            }
+        .icon-box i {
+            color: #10b981 !important;
+        }
 
-            .content-wrapper {
-                margin-left: 0;
-                width: 100%;
-            }
+        .custom-alert {
+            background-color: #f0fdf4 !important;
+            border: none !important;
+            border-left: 3px solid #10b981 !important;
+            border-radius: 6px;
+            padding: 10px 16px;
+            color: #14532d !important;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .table-responsive {
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            box-shadow: none !important;
+        }
+
+        .table {
+            margin-bottom: 0;
+            border-bottom: none !important;
+        }
+
+        .table thead th {
+            background-color: #f8fafc;
+            color: #64748b;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            padding: 14px 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .table tbody td {
+            padding: 14px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+
+        .table tbody tr:last-child td {
+            border-bottom: none !important; 
+        }
+
+        .table-hover tbody tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        .progress-wrapper {
+            min-width: 150px;
+        }
+
+        .progress {
+            border-radius: 6px;
+            background-color: #f1f5f9;
+            height: 6px;
+            overflow: hidden;
+        }
+
+        .status-badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid transparent;
+        }
+
+        .badge-premium-success { background-color: #f0fdf4 !important; color: #166534 !important; border-color: #bbf7d0 !important; }
+        .badge-premium-warning { background-color: #fffbec !important; color: #9a3412 !important; border-color: #fde68a !important; }
+        .badge-premium-danger { background-color: #fef2f2 !important; color: #991b1b !important; border-color: #fecaca !important; }
+
+        .btn-action-pill {
+            font-size: 12px;
+            font-weight: 600;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            padding: 5px 14px;
+            border-radius: 20px;
+            background: #ffffff;
+            transition: all 0.2s ease;
+        }
+
+        .btn-action-pill:hover {
+            background: #1e293b;
+            color: #ffffff !important;
+            border-color: #1e293b;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="sidebar-container">
+    <div class="main-wrapper">
         <?php include 'includes/navbar.php'; ?>
-    </div>
 
-    <div class="content-wrapper">
-
-        <div class="header-container">
+        <div class="content-container">
             <?php include 'includes/header.php'; ?>
-        </div>
 
-        <div class="main-content-area">
-            <div class="container-fluid">
+            <div class="p-4">
                 <div class="content-card">
 
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="icon-box p-2 rounded-3 me-3" style="background: #000000;">
-                            <i class="bi bi-calendar-check fs-3" style="color: #10b981;"></i>
-                        </div>
-                        <div>
-                            <h4 class="fw-bold m-0">Attendance Overview</h4>
-                            <small class="text-muted">Registration No:
-                                <?php echo htmlspecialchars($registration_no); ?></small>
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-box me-3">
+                                <i class="bi bi-calendar-check fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold text-dark m-0">Attendance Overview</h5>
+                                <div class="text-muted mt-0.5" style="font-size: 12px; font-weight: 500;">
+                                    Registration No: <span class="text-dark fw-semibold"><?php echo htmlspecialchars($registration_no); ?></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="alert alert-primary border-0 shadow-sm mb-4"
-                        style="background-color: #f0f7ff; color: #004085;">
-                        <i class="bi bi-info-circle me-2"></i><strong>Semester <?php echo $current_semester; ?></strong>
-                        - Active Courses
+                    <div class="alert custom-alert d-flex align-items-center mb-3" role="alert">
+                        <i class="bi bi-info-circle-fill me-2 fs-6"></i>
+                        <div>
+                            Currently displaying active course profiles for <span class="fw-bold">Semester <?php echo $current_semester; ?></span> track modules.
+                        </div>
                     </div>
 
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">
-                            <thead class="table-light">
+                            <thead>
                                 <tr>
                                     <th>Course & Instructor</th>
                                     <th class="text-center">CR Hours</th>
                                     <th class="text-center">Attendance</th>
-                                    <th>Progress</th>
-                                    <th class="text-center">Status</th>
-                                    <th class="text-end">Action</th>
+                                    <th>Progress Breakdown</th>
+                                    <th class="text-center">Academic Status</th>
+                                    <th class="text-end">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -226,62 +288,81 @@ $result = $conn->query($sql);
                                         $percentage = ($total > 0) ? round(($attended / $total) * 100) : 0;
 
                                         if ($percentage >= 75) {
+                                            $premium_class = "badge-premium-success";
                                             $color = "success";
                                             $label = "Satisfactory";
                                             $icon = "bi-check-circle-fill";
                                         } elseif ($percentage >= 65) {
+                                            $premium_class = "badge-premium-warning";
                                             $color = "warning";
-                                            $label = "Low";
+                                            $label = "Low Attendance";
                                             $icon = "bi-exclamation-triangle-fill";
                                         } else {
+                                            $premium_class = "badge-premium-danger";
                                             $color = "danger";
-                                            $label = "Shortage";
+                                            $label = "Shortage Penalty";
                                             $icon = "bi-x-octagon-fill";
                                         }
                                         ?>
                                         <tr>
                                             <td>
-                                                <div class="fw-bold text-dark">
-                                                    <?php echo htmlspecialchars($row['course_code']); ?></div>
-                                                <div class="text-muted small">
-                                                    <?php echo htmlspecialchars($row['course_title']); ?></div>
-                                                <div class="text-primary mt-1" style="font-size: 0.8rem;">
-                                                    <i class="bi bi-person-badge"></i>
+                                                <div class="fw-bold text-dark" style="font-size: 14px; letter-spacing: -0.1px;">
+                                                    <?php echo htmlspecialchars($row['course_code']); ?>
+                                                </div>
+                                                <div class="text-secondary small my-0.5" style="font-size: 12px; font-weight: 500;">
+                                                    <?php echo htmlspecialchars($row['course_title']); ?>
+                                                </div>
+                                                <div class="text-primary d-flex align-items-center gap-1" style="font-size: 11px; font-weight: 600;">
+                                                    <i class="bi bi-person-badge-fill text-secondary"></i>
                                                     <?php echo htmlspecialchars($row['teacher_name'] ?? 'Not Assigned'); ?>
                                                 </div>
                                             </td>
+                                            
                                             <td class="text-center">
-                                                <span
-                                                    class="badge bg-light text-dark border"><?php echo $row['credit_hours']; ?></span>
+                                                <span class="badge bg-light text-secondary border px-2 py-1 fw-semibold" style="font-size: 11px;">
+                                                    <?php echo $row['credit_hours']; ?> Cr
+                                                </span>
                                             </td>
+                                            
                                             <td class="text-center">
-                                                <span class="fw-bold"><?php echo $attended; ?></span> / <?php echo $total; ?>
+                                                <span class="fs-6 fw-bold text-dark"><?php echo $attended; ?></span>
+                                                <span class="text-muted mx-0.5" style="font-size: 12px;">/</span> 
+                                                <span class="text-secondary font-semibold" style="font-size: 13px;"><?php echo $total; ?></span>
                                             </td>
-                                            <td style="min-width: 150px;">
-                                                <small
-                                                    class="fw-bold text-<?php echo $color; ?>"><?php echo $percentage; ?>%</small>
-                                                <div class="progress mt-1">
-                                                    <div class="progress-bar bg-<?php echo $color; ?>"
-                                                        style="width: <?php echo $percentage; ?>%"></div>
+                                            
+                                            <td class="progress-wrapper">
+                                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                                    <span class="fw-bold text-<?php echo $color; ?>" style="font-size: 12px;"><?php echo $percentage; ?>%</span>
+                                                </div>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-<?php echo $color; ?>" 
+                                                         role="progressbar" 
+                                                         style="width: <?php echo $percentage; ?>%" 
+                                                         aria-valuenow="<?php echo $percentage; ?>" 
+                                                         aria-valuemin="0" 
+                                                         aria-valuemax="100"></div>
                                                 </div>
                                             </td>
+                                            
                                             <td class="text-center">
-                                                <span
-                                                    class="badge bg-<?php echo $color; ?>-subtle text-<?php echo $color; ?> border px-2 py-1">
+                                                <span class="status-badge <?php echo $premium_class; ?>">
                                                     <i class="bi <?php echo $icon; ?>"></i> <?php echo $label; ?>
                                                 </span>
                                             </td>
+                                            
                                             <td class="text-end">
-                                                <a href="attendance_details.php?code=<?php echo urlencode($row['course_code']); ?>"
-                                                    class="btn btn-sm btn-outline-secondary rounded-pill">
-                                                    <i class="bi bi-clock-history"></i> History
+                                                <a href="attendance_details.php?code=<?php echo urlencode($row['course_code']); ?>" 
+                                                   class="btn btn-action-pill text-nowrap shadow-none">
+                                                    <i class="bi bi-clock-history"></i> View Log
                                                 </a>
                                             </td>
                                         </tr>
                                     <?php endwhile; else: ?>
                                     <tr>
-                                        <td colspan="6" class="text-center py-5 text-muted">No courses found for your
-                                            semester.</td>
+                                        <td colspan="6" class="text-center py-5 text-muted">
+                                            <i class="bi bi-folder-x fs-2 d-block mb-2 text-secondary" style="opacity: 0.4;"></i>
+                                            <span class="small fw-medium">No verified attendance records cataloged for this specific semester track.</span>
+                                        </td>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>
@@ -289,9 +370,10 @@ $result = $conn->query($sql);
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <?php $conn->close(); ?>
 </body>
 
